@@ -1,26 +1,4 @@
-class Book:
-    """
-    Класс Book представляет книгу с уникальным идентификатором, названием, автором, годом издания и статусом доступности.
-
-    Атрибуты класса:
-        count (int): Счетчик для автоматического присвоения уникального ID каждой книге. Начинается с 1.
-    """
-
-    count = 1
-
-    def __init__(self, title, author, year, status="в наличии"):
-        self.id = Book.count
-        self.title = title
-        self.author = author
-        self.year = year
-        self.status = status
-        Book.count += 1
-
-    def __str__(self):
-        """
-        Возвращает строковое представление аттрибутов объекта Book
-        """
-        return f"ID: {self.id}\nНазвание: {self.title}\nАвтор: {self.author}\nГод: {self.year}\nСтатус: {self.status}\n"
+from book import Book
 
 
 class Library:
@@ -32,16 +10,30 @@ class Library:
         self.books.append(book)
         print(f"Книга '{title}' добавлена.\n")
 
-    def delete_book(self, book_id):
+    def delete_book(self, book_id: int) -> None:
+        """
+        Ищет книгу с указанным ID в библиотеки.
+        Если книга найдена, она удаляется. Если книга с таким ID отсутствует,
+        выводится сообщение об ошибке.
+        """
         for book in self.books:
 
-            if book.id == int(book_id):
+            if book.id == book_id:
                 self.books.remove(book)
                 print(f"Книга '{book.title}' удалена.\n")
                 return
         print(f"ОШИБКА! Книга ID: {book_id} не найдена.\n")
 
-    def search_books(self, query):
+    def search_books(self, query: str) -> None:
+        """
+        Ищет книги по названию,автору и ID в библиотеке.
+        Найденные книги выводит в терминал.
+        Поиск производится в нижнем регистре.
+        Если книги не найдены, выводмится сообщение о том,что книги не найдены.
+
+        Args:
+            query(str): Название книги, автор или год издания.
+        """
         results = [
             book
             for book in self.books
@@ -50,21 +42,41 @@ class Library:
             or query in book.year
         ]
         if results:
-            print("Найдены книги:")
+            print("-" * 25)
+            print("Найдены книги:\n")
             for book in results:
                 print(book)
+            print("Нажмите Enter для продолжения.")
+            input()
         else:
             print("Книги по вашему запросу не найдены.\n")
 
-    def display_books(self):
+    def display_books(self) -> None:
+        """
+        Перебирает все книги, хранящиеся в коллекции библиотеки, и выводит информацию
+        о каждой книге. Если библиотека пуста, выводится сообщение о том, что книги отсутствуют.
+        """
+
         if not self.books:
             print("В библиотеке нет книг.\n")
             return
         print("Список книг в библиотеке:")
         for book in self.books:
             print(book)
+        print("Нажмите Enter для продолжения.")
+        input()
 
-    def update_status(self, book_id, new_status):
+    def update_status(self, book_id: int, new_status: int) -> None:
+        """
+        Статус может быть либо "в наличии", либо "выдана". Если книга с таким ID
+        не найдена, выводится сообщение об ошибке.
+
+        Args:
+            book_id (int): Идентификатор книги, чей статус необходимо обновить.
+            new_status (int): Новый статус книги. Может быть "в наличии" если new_status == 1
+            или "выдана" если new_status == 0
+        """
+
         new_status = "в наличии" if new_status == 1 else "выдана"
         for book in self.books:
             if book.id == book_id:
