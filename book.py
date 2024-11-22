@@ -8,7 +8,9 @@ class Book:
 
     count = 1
 
-    def __init__(self, title, author, year, status="в наличии"):
+    def __init__(
+        self, title: str, author: str, year: str, status: str = "в наличии"
+    ) -> None:
         self.id = Book.count
         self.title = title
         self.author = author
@@ -20,4 +22,4 @@ class Book:
         """
         Возвращает строковое представление атрибутов объекта Book
         """
-        return f"ID: {self.id}\nНазвание: {self.title}\nАвтор: {self.author}\nГод: {self.year}\nСтатус: {self.status}\n"
+        return f"ID: {self.id}\nНазвание: {self.title}\nАвтор: {self.author}\nГод: {self.year}\nСтатус: {self.status}\n    *** "

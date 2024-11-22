@@ -1,47 +1,82 @@
 from book import Book
 
-# from write_read import write_file
+
+def write_read_file(books: list = None, choice_action: str = "w") -> None:
+    """
+    Функция для записи или чтения данных о книгах в/из файла `library_data.txt`.
+
+    Args:
+        books (list, optional): Список объектов книг.
+        choice_action (str, optional): Режим работы с файлом.
 
 
-def write_file(books: list = None, choice_action: str = "w") -> None:
+    Функциональность:
+        - Если `choice_action` равно "w", функция записывает информацию о книгах из списка `books` в файл `library_data.txt` в формате CSV (id, title, author, year, status).
+        - Если `choice_action` отличается от "w", функция читает строки из файла, обрабатывает их и добавляет книги в объект библиотеки.
+
+    Исключения:
+        - При чтении файла: если строка в файле не соответствует ожидаемому формату, выводится сообщение "Нет записи".
+
+    """
 
     library = Library()
     with open("library_data.txt", choice_action, encoding="utf-8") as file:
         if choice_action == "w":
-            # print(book.id)
             for book in books:
-                # print(book)
                 file.write(
                     f"{book.id},{book.title},{book.author},{book.year},{book.status}\n"
                 )
         else:
-            for line in file:
-                id, title, author, year, status = line.strip().split(",")
-                # print(line.strip().split(","))
-                library.add_book(title, author, year, status)
-            library.write_file()
+            try:
+                for line in file:
+
+                    # Удаление лишних пробелов и символов новой строки,
+                    # Присвоение значений переменным
+                    id, title, author, year, status = line.strip().split(",")
+                    # print(line.strip().split(","))
+
+                    # Вызов метода добавления книги в список библиотеки
+                    library.add_book(title, author, year, status)
+
+            # Вызов метода записи в файл списка книг библиотеки.
+            # Этот метод перезапишет файл с данными о книгах, начиная с нового ID для каждой книги.
+            # Если необходимо, раскомментируйте строку.
+            # library.write_file()
+            except ValueError:
+                print("Нет записи")
 
 
 class Library:
+    # Список книг в библиотеке
     books = []
 
-    def add_book(self, title, author, year, status="в наличии"):
-        # book_id = len(self.books) + 1
+    def add_book(self, title: str, author: str, year: str, status: str = "в наличии"):
+        """
+        Создает новый объект книги (Book) с переданными параметрами
+        и добавляет его в список книг библиотеки (self.books).
+        """
+        # Создание нового объекта книги
         book = Book(title, author, year, status)
-        # print(book.__dict__)
-        self.books.append(book)
 
+        # Добавление книги в список
+        self.books.append(book)
         print(f"Книга '{title}' добавлена.\n")
 
     def write_file(self):
-
-        write_file(self.books)
+        """
+        Вызывает функцию `write_file`, передавая ей список всех книг,
+        хранящихся в библиотеке (self.books) для записи данных в файл (формат CSV).
+        """
+        write_read_file(self.books)
 
     def delete_book(self, book_id: int) -> None:
         """
         Ищет книгу с указанным ID в библиотеке.
         Если книга найдена, она удаляется. Если книга с таким ID отсутствует,
         выводится сообщение об ошибке.
+
+        Args:
+            book_id(int): ID книги
         """
         for book in self.books:
             if book.id == book_id:
@@ -60,6 +95,7 @@ class Library:
         Args:
             query(str): Название книги, автор или год издания.
         """
+        # список который содержит книги, соответствующие поисковому запросу query
         results = [
             book
             for book in self.books
@@ -67,8 +103,10 @@ class Library:
             or query.lower() in book.author.lower()
             or query in book.year
         ]
+
+        # Если есть что показать,то покажет
         if results:
-            print("-" * 25)
+            print("-" * 40)
             print("Найдены книги:\n")
             for book in results:
                 print(book)
@@ -87,6 +125,7 @@ class Library:
             print("В библиотеке нет книг.\n")
             return
         print("Список книг в библиотеке:")
+        print("-" * 40)
         for book in self.books:
             print(book)
         print("Нажмите Enter для продолжения.")
@@ -104,6 +143,8 @@ class Library:
         """
 
         new_status = "в наличии" if new_status == 1 else "выдана"
+
+        # Поиск книги по ID и присвоение нового статуса
         for book in self.books:
             if book.id == book_id:
                 book.status = new_status

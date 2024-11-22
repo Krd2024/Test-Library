@@ -1,7 +1,2 @@
-1,qqq,qqqqqqq,1111,в наличии
-2,aaaa,aaaaaa,22222,в наличии
-3,aaaa,aaaaaa,33333,в наличии
-4,aaaa,aaaaaa,33333,в наличии
-5,book,author1,2024,в наличии
-6,book,author2,2024,в наличии
-7,book,author3,2024,в наличии
+1,test,ya,111,в наличии
+2,aaa,aaaa,11111,в наличии
