@@ -1,23 +1,49 @@
 from book import Book
 
+# from write_read import write_file
+
+
+def write_file(books: list = None, choice_action: str = "w") -> None:
+
+    library = Library()
+    with open("library_data.txt", choice_action, encoding="utf-8") as file:
+        if choice_action == "w":
+            # print(book.id)
+            for book in books:
+                # print(book)
+                file.write(
+                    f"{book.id},{book.title},{book.author},{book.year},{book.status}\n"
+                )
+        else:
+            for line in file:
+                id, title, author, year, status = line.strip().split(",")
+                # print(line.strip().split(","))
+                library.add_book(title, author, year, status)
+            library.write_file()
+
 
 class Library:
     books = []
 
-    def add_book(self, title, author, year):
-
-        book = Book(title, author, year)
+    def add_book(self, title, author, year, status="в наличии"):
+        # book_id = len(self.books) + 1
+        book = Book(title, author, year, status)
+        # print(book.__dict__)
         self.books.append(book)
+
         print(f"Книга '{title}' добавлена.\n")
+
+    def write_file(self):
+
+        write_file(self.books)
 
     def delete_book(self, book_id: int) -> None:
         """
-        Ищет книгу с указанным ID в библиотеки.
+        Ищет книгу с указанным ID в библиотеке.
         Если книга найдена, она удаляется. Если книга с таким ID отсутствует,
         выводится сообщение об ошибке.
         """
         for book in self.books:
-
             if book.id == book_id:
                 self.books.remove(book)
                 print(f"Книга '{book.title}' удалена.\n")

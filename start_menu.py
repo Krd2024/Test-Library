@@ -1,5 +1,7 @@
-from library import Library
+from library_class import Library, write_file
 from check import is_digit
+
+# from write_read import write_file
 
 
 def main() -> None:
@@ -15,6 +17,7 @@ def main() -> None:
     - Завершение работы программы.
     """
     library = Library()
+    write_file(choice_action="r")
 
     while True:
         print("Меню упрвления библиотекой:")
@@ -41,6 +44,7 @@ def main() -> None:
                     # Если год является числом, вызвать метоДобавления книги в библиотеку.
                     if is_digit(year):
                         library.add_book(title, author, year)
+                        library.write_file()
                     else:
                         print("-" * 25)
                         print("ОШИБКА! В поле 'year' используются только числа ")
@@ -61,6 +65,7 @@ def main() -> None:
             # Если id является числом, вызвать метод удаления книги.
             if is_digit(book_id):
                 library.delete_book(int(book_id))
+                library.write_file()
             else:
                 print("-" * 25)
                 print("ОШИБКА! Только числа ")
@@ -89,6 +94,7 @@ def main() -> None:
                     print("-" * 25)
                 else:
                     library.update_status(int(book_id), int(new_status))
+                    library.write_file()
             else:
                 print("-" * 25)
                 print("ОШИБКА! Только числа ")
