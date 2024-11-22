@@ -18,9 +18,13 @@ def write_read_file(books: list = None, choice_action: str = "w") -> None:
         - При чтении файла: если строка в файле не соответствует ожидаемому формату, выводится сообщение "Нет записи".
 
     """
-
+    # Создаем объект библиотеки
     library = Library()
-    with open("library_data.txt", choice_action, encoding="utf-8") as file:
+
+    with open("library_data.csv", choice_action, encoding="utf-8") as file:
+
+        # Перезаписывает файл если режим "w
+        # Записывает новую коллекцию с именёнными или удаленными объектами книг
         if choice_action == "w":
             for book in books:
                 file.write(
@@ -36,6 +40,7 @@ def write_read_file(books: list = None, choice_action: str = "w") -> None:
                     # print(line.strip().split(","))
 
                     # Вызов метода добавления книги в список библиотеки
+                    # Получает данные из файла
                     library.add_book(title, author, year, status)
 
             # Вызов метода записи в файл списка книг библиотеки.
