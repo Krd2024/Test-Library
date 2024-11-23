@@ -90,7 +90,7 @@ class Library:
                 return
         print(f"ОШИБКА! Книга ID: {book_id} не найдена.\n")
 
-    def search_books(self, query: str) -> None:
+    def search_books(self, query: str, test: bool = False) -> None:
         """
         Ищет книги по названию,автору и ID в библиотеке.
         Найденные книги выводит в терминал.
@@ -99,6 +99,8 @@ class Library:
 
         Args:
             query(str): Название книги, автор или год издания.
+            test(bool): Если True, метод возвращает результат поиска как список.
+                        По умолчанию False.
         """
         # список который содержит книги, соответствующие поисковому запросу query
         results = [
@@ -108,6 +110,8 @@ class Library:
             or query.lower() in book.author.lower()
             or query in book.year
         ]
+        if test:
+            return results
 
         # Если есть что показать,то покажет
         if results:
