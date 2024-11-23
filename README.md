@@ -1,5 +1,7 @@
 # Библиотечное Приложение
-Пользователи могут ![2024-11-23_13-06-28](https://github.com/user-attachments/assets/44c82ab0-a242-4cd8-aaa8-5a75235a30ab)
+![2024-11-23_13-06-28](https://github.com/user-attachments/assets/44c82ab0-a242-4cd8-aaa8-5a75235a30ab)
+
+Пользователи могут
 
 Это приложение предназначено для управления библиотекой книг. Все данные о книгах хранятся в текстовом файле(csv).
 
@@ -47,3 +49,9 @@ git clone https://github.com/Krd2024/Test-Library.git
    ```bash
 python start_menu.py 
 ```
+## Тестирование проекта
+1.Запустите тесты:
+   ```bash
+python tests.py    
+```
+
