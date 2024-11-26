@@ -1,3 +1,4 @@
+[![Lint](https://github.com/Krd2024/Test-Library/actions/workflows/lint.yml/badge.svg)](https://github.com/Krd2024/Test-Library/actions/workflows/lint.yml)
 # Библиотечное Приложение
 ![2024-11-23_13-06-28](https://github.com/user-attachments/assets/44c82ab0-a242-4cd8-aaa8-5a75235a30ab)
 
