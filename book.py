@@ -21,5 +21,6 @@ class Book:
     def __str__(self):
         """
         Возвращает строковое представление атрибутов объекта Book
+
         """
         return f"ID: {self.id}\nНазвание: {self.title}\nАвтор: {self.author}\nГод: {self.year}\nСтатус: {self.status}\n    *** "
