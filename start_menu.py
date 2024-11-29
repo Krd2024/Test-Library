@@ -25,6 +25,7 @@ def main() -> None:
     library = Library()
 
     # Вызвать функцию для чтения из файла (выбор действия "r" для чтения)
+    # Создаёт библиотеку из книг записанных в файле
     write_read_file(choice_action="r")
 
     while True:
@@ -60,7 +61,6 @@ def main() -> None:
                     # Если год является числом, вызвать метоДобавления книги в библиотеку.
                     if is_digit(year):
                         library.add_book(title, author, year)
-                        library.write_file()
                     else:
                         print("-" * 40)
                         print("ОШИБКА! В поле 'year' используются только числа ")
@@ -83,7 +83,7 @@ def main() -> None:
             # Если id является числом, вызвать метод удаления книги.
             if is_digit(book_id):
                 library.delete_book(int(book_id))
-                library.write_file()
+                # library.write_file()
             else:
                 print("-" * 40)
                 print("ОШИБКА! Только числа ")
@@ -130,9 +130,6 @@ def main() -> None:
                     # Вызоа метода обновления статуса
                     library.update_status(int(book_id), int(new_status))
 
-                    # Вызов метода записи в файл
-                    # Для обновления данных после изменения статуса
-                    library.write_file()
             else:
                 print("-" * 40)
                 print("ОШИБКА! Только числа ")

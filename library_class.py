@@ -67,6 +67,10 @@ class Library:
         self.books.append(book)
         print(f"Книга '{title}' добавлена.\n")
 
+        # Вызов метода записи в файл
+        # Для обновления данных после добавления книги
+        self.write_file()
+
     def write_file(self):
         """
         Вызывает функцию `write_file`, передавая ей список всех книг,
@@ -87,6 +91,11 @@ class Library:
             if book.id == book_id:
                 self.books.remove(book)
                 print(f"Книга '{book.title}' удалена.\n")
+
+                # Вызывает метод записи в файл
+                # Для обновления данных после удаления
+                self.write_file()
+
                 return
         print(f"ОШИБКА! Книга ID: {book_id} не найдена.\n")
 
@@ -158,5 +167,10 @@ class Library:
             if book.id == book_id:
                 book.status = new_status
                 print(f"Статус книги '{book.title}' обновлен на '{new_status}'.\n")
+
+                # Вызов метода записи в файл
+                # Для обновления данных после изменения статуса
+                self.write_file()
+
                 return
         print(f"ОШИБКА! Книга ID: {book_id} не найдена.\n")
