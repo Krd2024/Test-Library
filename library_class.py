@@ -119,6 +119,7 @@ class Library:
             or query.lower() in book.author.lower()
             or query in book.year
         ]
+        # Если метод вызван из теста, вернёт результат поиска в виде списка
         if test:
             return results
 
